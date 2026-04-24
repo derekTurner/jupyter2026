@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask ToDo</title>
+    <style>
+        body { font-family: sans-serif; max-width: 500px; margin: 50px auto; }
+        ul { list-style: none; padding: 0; }
+        li { background: #f4f4f4; margin: 5px 0; padding: 10px; display: flex; justify-content: space-between; }
+        .delete-btn { color: red; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>My Tasks</h2>
+    
+    <form action="/add" method="POST">
+        <input type="text" name="content" placeholder="Enter a new task..." required>
+        <button type="submit">Add Task</button>
+    </form>
+
+    <ul>
+        {% for task in tasks %}
+        <li>
+            {{ task[1] }}
+            <a href="{{ url_for('delete_task', task_id=task[0]) }}" class="delete-btn">X</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
